@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MovieController extends Controller
 {
     /**
-     * Retrieve the movies from TMDb.
+     * Retrieve the upcoming movies from TMDb.
      *
      * @return Response
      */
@@ -19,5 +19,17 @@ class MovieController extends Controller
         ]);
         $page = $data['page'] ?? 1;
         return $tmdb->getMoviesApi()->getUpcoming(['page' => $page]);
+    }
+
+    /**
+     * Retrive movies from TMDb by query
+     */
+
+    public function search(Request $request, Client $tmdb)
+    {
+        $data = $this->validate($request, [
+            'query' => 'required|string'
+        ]);
+        return $tmdb->getSearchApi()->searchMovies($data['query']);
     }
 }

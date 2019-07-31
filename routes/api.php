@@ -12,3 +12,4 @@
 */
 
 $router->get('/movies/upcoming', 'MovieController@upcoming');
+$router->get('/search/movies', 'MovieController@search');
