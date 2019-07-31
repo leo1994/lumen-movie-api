@@ -10,6 +10,8 @@ class MovieController extends Controller
     /**
      * Retrieve the upcoming movies from TMDb.
      *
+     * @param Request $request
+     * @param Client $tmdb
      * @return Response
      */
     public function upcoming(Request $request, Client $tmdb)
@@ -22,9 +24,12 @@ class MovieController extends Controller
     }
 
     /**
-     * Retrive movies from TMDb by query
+     * Search movies from TMDb by query
+     *
+     * @param Request $request
+     * @param Client $tmdb
+     * @return void
      */
-
     public function search(Request $request, Client $tmdb)
     {
         $data = $this->validate($request, [
