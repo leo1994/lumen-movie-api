@@ -33,8 +33,11 @@ class MovieController extends Controller
     public function search(Request $request, Client $tmdb)
     {
         $data = $this->validate($request, [
-            'query' => 'required|string'
+            'query' => 'required|string',
+            'page' => 'sometimes|required|int'
         ]);
-        return $tmdb->getSearchApi()->searchMovies($data['query']);
+
+        $page = $data['page'] ?? 1;
+        return $tmdb->getSearchApi()->searchMovies($data['query'], ['page' => $page]);
     }
 }
